@@ -22,10 +22,11 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Note save(Note note) {
         if(note.getId() == 0){
-            note.setLastUpdatedTime(LocalDateTime.now());
             note.setUserId(1);
-            note.setStatusId(CommonConstant.STATUS_ID_ACTIVE);
         }
+
+        note.setStatusId(CommonConstant.STATUS_ID_ACTIVE);
+        note.setLastUpdatedTime(LocalDateTime.now());
 
         return this.noteRepository.saveAndFlush(note);
     }

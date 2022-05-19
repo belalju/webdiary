@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> getAllActive() {
-        return this.categoryRepository.findAllByStatusId(CommonConstant.STATUS_ID_ACTIVE);
+        return this.categoryRepository.findAllByStatusIdOrderByIdAsc(CommonConstant.STATUS_ID_ACTIVE);
     }
 
     @Override

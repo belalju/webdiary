@@ -28,6 +28,11 @@ public class CategoryApi {
         return ResponseEntity.ok(this.categoryService.getAll());
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<List<Category>> getAllActive(){
+        return ResponseEntity.ok(this.categoryService.getAllActive());
+    }
+
     @PostMapping("/update/{id}")
     public ResponseEntity<Category> update(@PathVariable Long id, @Valid @RequestBody Category category){
         return ResponseEntity.ok(this.categoryService.update(id, category));

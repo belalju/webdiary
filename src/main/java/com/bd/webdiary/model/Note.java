@@ -2,13 +2,9 @@ package com.bd.webdiary.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Data
@@ -18,6 +14,8 @@ public class Note {
     private long id;
 
     private long categoryId;
+
+    private String categoryName;
 
     private long userId;
 
