@@ -21,10 +21,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note save(Note note) {
-        if(note.getId() == 0){
-            note.setUserId(1);
-        }
-
+        note.setUserId(1);
         note.setStatusId(CommonConstant.STATUS_ID_ACTIVE);
         note.setLastUpdatedTime(LocalDateTime.now());
 
@@ -41,9 +38,9 @@ public class NoteServiceImpl implements NoteService {
                 existingCategory.setCategoryId(note.getCategoryId());
                 existingCategory.setTitle(note.getTitle());
                 existingCategory.setContent(note.getContent());
-                existingCategory.setStatusId(note.getStatusId());
+               // existingCategory.setStatusId(note.getStatusId());
                 existingCategory.setLastUpdatedTime(LocalDateTime.now());
-                return save(existingCategory);
+                return this.noteRepository.saveAndFlush(existingCategory);
             });
         }
 
@@ -56,13 +53,12 @@ public class NoteServiceImpl implements NoteService {
         if(!noteOptional.isPresent()){
             throw new ConstraintViolationException("ID " + id + " not found", null);
         } else {
-            noteOptional.map(existingNote -> {
-                existingNote.setStatusId(CommonConstant.STATUS_ID_INACTIVE);
-                return save(existingNote);
-            });
+            Note note = noteOptional.get();
+            note.setStatusId(CommonConstant.STATUS_ID_INACTIVE);
+            note.setLastUpdatedTime(LocalDateTime.now());
+            return this.noteRepository.saveAndFlush(note);
         }
 
-        return null;
     }
 
     @Override
