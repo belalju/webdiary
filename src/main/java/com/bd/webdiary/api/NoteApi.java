@@ -28,6 +28,11 @@ public class NoteApi {
         return ResponseEntity.ok(this.noteService.getAllActive());
     }
 
+    @GetMapping("/byCategory/{categoryId}")
+    public ResponseEntity<List<Note>> getAllByCategory(@PathVariable Long categoryId){
+        return ResponseEntity.ok(this.noteService.getAllByCategory(categoryId));
+    }
+
     @PostMapping("/update/{id}")
     public ResponseEntity<Note> update(@PathVariable Long id, @Valid @RequestBody Note note){
         return ResponseEntity.ok(this.noteService.update(id, note));

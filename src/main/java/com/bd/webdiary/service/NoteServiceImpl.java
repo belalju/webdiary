@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +63,11 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public List<Note> getAllActive() {
         return this.noteRepository.findAllByStatusId(CommonConstant.STATUS_ID_ACTIVE);
+    }
+
+    @Override
+    public List<Note> getAllByCategory(long categoryId) {
+        return this.noteRepository.findAllByCategoryId(CommonConstant.STATUS_ID_ACTIVE, categoryId);
     }
 
     @Override
