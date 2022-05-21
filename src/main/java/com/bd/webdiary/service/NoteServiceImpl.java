@@ -3,6 +3,7 @@ package com.bd.webdiary.service;
 import com.bd.webdiary.model.Note;
 import com.bd.webdiary.repository.NoteRepository;
 import com.bd.webdiary.util.CommonConstant;
+import com.bd.webdiary.util.UserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolationException;
@@ -20,7 +21,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note save(Note note) {
-        note.setUserId(1);
+        note.setUserId(UserUtil.getUser().getId());
         note.setStatusId(CommonConstant.STATUS_ID_ACTIVE);
         note.setLastUpdatedTime(LocalDateTime.now());
 
@@ -62,12 +63,12 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<Note> getAllActive() {
-        return this.noteRepository.findAllByStatusId(CommonConstant.STATUS_ID_ACTIVE);
+        return this.noteRepository.findAllByStatusId(UserUtil.getUser().getId(), CommonConstant.STATUS_ID_ACTIVE);
     }
 
     @Override
     public List<Note> getAllByCategory(long categoryId) {
-        return this.noteRepository.findAllByCategoryId(CommonConstant.STATUS_ID_ACTIVE, categoryId);
+        return this.noteRepository.findAllByCategoryId(UserUtil.getUser().getId(), CommonConstant.STATUS_ID_ACTIVE, categoryId);
     }
 
     @Override
