@@ -13,7 +13,7 @@ Personal Web Diary
 
 ### Building the project
 * Open project from Intellij IDEA
-* Change Database connection information in application.properties file
+* Change Database connection information in **application.properties** file
 * Clean project using Maven
 * Run the project OR Package project using Maven for Deployment.
 
